@@ -1,8 +1,10 @@
 package com.mate.yerba.controller;
 
+import com.mate.yerba.dto.RestResponse;
 import com.mate.yerba.model.Yerba;
 import com.mate.yerba.service.implementation.YerbaServiceImplementation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,6 +21,24 @@ public class YerbaController {
     @GetMapping("/all")
     public List<Yerba> getAllYerbas(){
         return yerbaServiceImplementation.getAllYerbas();
+    }
+
+    @GetMapping("/v2/all")
+    public RestResponse<List<Yerba>> getAllYerba() throws Exception{
+        List<Yerba> allYerbas = null;
+        HttpStatus httpStatus = HttpStatus.INTERNAL_SERVER_ERROR;
+        try{
+            List<Yerba> response = yerbaServiceImplementation.getAllYerbas();
+            if(!response.isEmpty()){
+                httpStatus = HttpStatus.OK;
+                allYerbas = response;
+            }else{
+                httpStatus = HttpStatus.NO_CONTENT;
+            }
+        }catch (Exception e){
+            e.getCause();
+        }
+       return new RestResponse<>(httpStatus, allYerbas);
     }
 
     @GetMapping("/id/{idYerba}")
