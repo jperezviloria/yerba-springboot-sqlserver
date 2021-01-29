@@ -21,10 +21,22 @@ public class YerbaController {
         return yerbaServiceImplementation.getAllYerbas();
     }
 
-    @GetMapping("/{idYerba}")
+    @GetMapping("/id/{idYerba}")
     public Optional<Yerba> getYerbaById(@PathVariable int idYerba){
         return yerbaServiceImplementation.getYerbaById(idYerba);
     }
+
+    @GetMapping("/brand/{brandYerba}")
+    public Yerba getYerbaByBrand(@PathVariable String brandYerba){
+        return yerbaServiceImplementation.getYerbaByBrand(brandYerba);
+    }
+
+    @GetMapping("/price/{priceYerba}")
+    public Yerba getYerbaByPrice(@PathVariable int priceYerba){
+        return yerbaServiceImplementation.getYerbaByPrice(priceYerba);
+    }
+
+
 
     @PostMapping
     public String saveYerba(@RequestBody Yerba yerba){

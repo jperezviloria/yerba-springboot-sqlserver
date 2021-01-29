@@ -12,6 +12,7 @@ import java.util.Optional;
 @Service
 public class YerbaServiceImplementation implements YerbaService {
 
+
     @Autowired
     YerbaRepository yerbaRepository;
 
@@ -29,5 +30,15 @@ public class YerbaServiceImplementation implements YerbaService {
     public String saveYerba(Yerba yerba) {
         yerbaRepository.save(yerba);
         return "yerba was saved";
+    }
+
+    @Override
+    public Yerba getYerbaByBrand(String brandYerba) {
+        return yerbaRepository.getYerbaByBrand(brandYerba);
+    }
+
+    @Override
+    public Yerba getYerbaByPrice(int priceYerba) {
+        return yerbaRepository.getYerbaByPrice(priceYerba);
     }
 }

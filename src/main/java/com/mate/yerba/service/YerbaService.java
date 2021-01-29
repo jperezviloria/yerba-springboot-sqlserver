@@ -13,4 +13,10 @@ public interface YerbaService {
 
     String saveYerba(Yerba yerba);
 
+    Yerba getYerbaByBrand(String brandYerba);
+
+    Yerba getYerbaByPrice(int priceYerba);
+
+
+
 }
