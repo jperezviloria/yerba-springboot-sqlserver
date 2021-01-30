@@ -1,9 +1,9 @@
 package com.mate.yerba.repository.implementation;
 
 import com.mate.yerba.model.Yerba;
-import com.mate.yerba.repository.YerbaRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
@@ -18,6 +18,9 @@ public abstract class YerbaRepositoryImplementation {
     @PersistenceContext
     @Autowired
     private EntityManager entityManager;
+
+    @Autowired
+    JdbcTemplate jdbcTemplate;
 
 
     public Yerba getYerbaByPrice(int priceYerba) {
@@ -45,5 +48,9 @@ public abstract class YerbaRepositoryImplementation {
             e.printStackTrace();
         }
         return yerba;
+    }
+
+    public void getAllYerbas2(){
+        jdbcTemplate.execute("EXEC getAllYerba");
     }
 }
